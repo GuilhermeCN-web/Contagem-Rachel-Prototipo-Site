@@ -14,17 +14,6 @@ type Dados = Record<string, number | "">;
 type Dia = { key: string; day: number; dow: number; date: Date };
 type Semana = { mondayKey: string; mondayDate: Date; dias: Dia[]; semana: number };
 
-const COLORS = {
-  white: "#FFFFFF",
-  green: "#008A4B",
-  greenLight: "#32AF77",
-  yellow: "#FFE50A",
-  orange: "#E94F24",
-  text: "#1F2D26",
-  textSoft: "#68756F",
-  border: "#D9E2DD",
-  background: "#F7FAF8",
-};
 
 function pad(n: number) { return String(n).padStart(2, "0"); }
 function dateKey(y: number, m: number, d: number) { return `${y}-${pad(m + 1)}-${pad(d)}`; }
@@ -160,16 +149,8 @@ export default function FichaChamada() {
     }, 0);
   }
 
-  function totalTurmaSemana(turmaId: string, week: Semana) {
-    return week.dias.reduce((acc, dia) => acc + (Number(dados[`${turmaId}|${dia.key}`]) || 0), 0);
-  }
-
   function totalSemana(week: Semana) {
     return week.dias.reduce((acc, dia) => acc + totalDia(dia.key), 0);
-  }
-
-  function totalSemanaCategoria(week: Semana, categoria: Categoria) {
-    return week.dias.reduce((acc, dia) => acc + totalDiaCategoria(dia.key, categoria), 0);
   }
 
   function pertenceAoMesAtual(diaKey: string) {
